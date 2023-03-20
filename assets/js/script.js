@@ -70,13 +70,33 @@ function displayCurrentWeather(weather) {
     var todayData = $("#today").empty();
     var forecastData = $("#forecast").empty();
 
-    //possiblity create cards in a div?
+    //dynamically created divs for cards 
+    var card = $("<div>")
+    .addClass(" card border border-info")
+    .css({ width: "60rem", height: "300px" });
+    //adding a section for the forecast section
+    var cardElement = $("<div>").addClass(" d-flex space-between ");
+    //possibly create <p> element to store the weather forecast content in the card
+    var contentParagraph = $("<h3>")
+    contentParagraph.text("5-Day Weather Forecast");
 
+    //the forecast being appended to the cards so it displays
+    forecastData.append(contentParagraph);
+    forecastData.append(cardElement);
 
-    //possibly create <p> element to store the weather forecast content in the card?
+    //apending today's data to a card
+    todayData.append(card);
 
+    //creating a section to show a weather icon
 
-    //append forecast and weather to cards?
+    //dynamically creating an image tag
+    var icon = $("<img>");
+    //call icon data from API url
+    icon.attr(
+        "src",
+        `http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`
+    );
+
 
 }
 
