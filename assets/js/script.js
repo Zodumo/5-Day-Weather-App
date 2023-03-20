@@ -72,8 +72,8 @@ function displayCurrentWeather(weather) {
 
     //dynamically created divs for cards 
     var card = $("<div>")
-    .addClass(" card border border-info")
-    .css({ width: "60rem", height: "300px" });
+        .addClass(" card border border-info")
+        .css({ width: "60rem", height: "300px" });
     //adding a section for the forecast section
     var cardElement = $("<div>").addClass(" d-flex space-between ");
     //possibly create <p> element to store the weather forecast content in the card
@@ -97,7 +97,32 @@ function displayCurrentWeather(weather) {
         `http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`
     );
 
+    // The Following Section is Forming an Unordered List To Store Different Weather Conditions. 
+    //this list will store all data includind city, humidity, temperature and wind
+    var list = $("<ul>").addClass("list-unstyled pl-5 ");
+    //this list will append to a today card
+    card.append(list);
 
+    //Storing data about the city the user entered 
+    var cityItem = $("<li>").addClass("h2 pb-4");
+    // fetch from the API the city user will saerch
+    var city = cityQueryCall
+    // Will show the city
+    cityItem.text(city + " (" + formatDate + ")");
+
+    //storing data about temperature and ensuring it is in degrees celcius
+    var tempItem = $("<li>").addClass("pb-2");
+    // fech from the API the temperature
+    var celsiusTemperature = weather.current.temp;
+    // will show the temperature in celsios
+    tempItem.text("Temp: " + celsiusTemperature + "°C");
+
+    //storing data about wind speed
+    var windItem = $("<li>").addClass("pb-2");
+    // fech from the API the wind
+    var wind = weather.current.wind_speed;
+    // will show the temperatue in m/s
+    windItem.text("wind: " + wind + " m/s");
 }
 
 
