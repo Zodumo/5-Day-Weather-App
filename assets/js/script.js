@@ -108,7 +108,7 @@ function displayCurrentWeather(weather) {
     // fetch from the API the city user will saerch
     var city = cityQueryCall
     // Will show the city
-    cityItem.text(city + " (" + formatDate + ")");
+    cityItem.text(city + " (" + dateFormat + ")");
 
     //storing data about temperature and ensuring it is in degrees celcius
     var tempItem = $("<li>").addClass("pb-2");
@@ -138,6 +138,29 @@ function displayCurrentWeather(weather) {
     list.append(tempItem);
     list.append(windItem);
     list.append(humidityItem);
-}
+
+    //A separate div for forecast data list with the date
+
+    for (var i = 0; i < 5; i++) {
+        var forecastList = $("<ul>")
+            .addClass("list-unstyled card mr-5 bg-info")
+            .css({ height: "250px", padding: "24px" });
+        cardElement.append(forecastList);
+
+        // iterating through the data object to retrieve the date
+        // again, we're using moment to format the date to DD/MM/YYYY
+        var dailyDate = $("<li>");
+        var dateEl = weather.daily[i].dt;
+        var dateFormatEl = moment.unix(dateEl).format("DD/MM/YYYY");
+        dailyDate.text(dateFormatEl);
+        forecastList.append(dailyDate);
+
+        var iconElement = $("<img>");
+        iconElement.attr(
+            "src",
+
+            `http://openweathermap.org/img/wn/${weather.daily[i].weather[0].icon}.png`
+        );
+    }
 
 
