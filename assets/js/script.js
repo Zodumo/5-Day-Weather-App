@@ -59,20 +59,25 @@ function getCurrWeather(lat, lon) {
         displayCurrentWeather(response);
     })
 }
-//convert date to dd/mm/yyyy format using moment.
+
+//function to display the current weather
+function displayCurrentWeather(weather) {
+    //accessing the object (weather data) and fetching the date
+    var date = weather.current.dt;
+    //convert date to dd/mm/yyyy format using moment.
+    var dateFormat = moment.unix(date).format("DD/MM/YYYY");
+    //get forecast and today's weather IDs from index.html. 
+    var todayData = $("#today").empty();
+    var forecastData = $("#forecast").empty();
+
+    //possiblity create cards in a div?
 
 
-//get forecast and today's weather IDs from index.html. 
+    //possibly create <p> element to store the weather forecast content in the card?
 
 
-//possiblity create cards in a div?
+    //append forecast and weather to cards?
 
-
-//possibly create <p> element to store the weather forecast content in the card?
-
-
-//append forecast and weather to cards?
-
-
+}
 
 
