@@ -25,7 +25,27 @@ function citySearch(e) {
 $("search-button").on("click", citySearch);
 
 //use API URL to get longitude and longitude coordinates.
+function getCoords(search) {
+    //call from API to get the city coords based on user search 
+    var searchCoordsURL = `${queryURL}geo/1.0/direct?q=${search}&limit=5&appid=${APIKey}`;
+    // first GET Ajax call to get coordinates
+    $.ajax({
+        url: searchCoordsURL,
+        method: "GET",
+    }).then(function (response) {
+        //retrieving the name of the city
+        cityQueryCall = response[0].name;
+        //retieving the weather of the city which will be called in the function to save it
+        saveWeather(response[0].name);
 
+        //fetching longitude and latitude data
+        var lat = response[0].lat;
+        var lon = response[0].lon;
+
+        //saving the longitude and latitude data to function getting current weather.
+        getCurrWeather(lat, lon)
+    });
+}
 
 //Function to display current weather 
 
