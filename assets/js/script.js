@@ -21,11 +21,11 @@ function citySearch(e) {
     $("#search-input").val("");
 }
 
-
-//create event for search button. 
-
+//create event click for search button using search-button id from HTML. 
+$("search-button").on("click", citySearch);
 
 //use API URL to get longitude and longitude coordinates.
+
 
 //Function to display current weather 
 
