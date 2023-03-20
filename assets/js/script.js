@@ -123,6 +123,21 @@ function displayCurrentWeather(weather) {
     var wind = weather.current.wind_speed;
     // will show the temperatue in m/s
     windItem.text("wind: " + wind + " m/s");
+
+    //storing data on humidity levels
+    var humidityItem = $("<li>");
+    // fech from the API the humidity
+    var humidity = weather.current.humidity;
+    // will show the humidity in %
+    humidityItem.text("humidity: " + humidity + "%");
+
+    //displaying the above items on the html page
+    todayData.innerHTML = "";
+    list.append(cityItem);
+    list.append(icon);
+    list.append(tempItem);
+    list.append(windItem);
+    list.append(humidityItem);
 }
 
 
