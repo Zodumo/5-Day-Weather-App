@@ -47,9 +47,18 @@ function getCoords(search) {
     });
 }
 
-//Function to display current weather 
-
-
+//Function to fetch current weather 
+function getCurrWeather(lat, lon) {
+    //Second GET Ajax call to get current weather based on coordinates
+    var CurrentWeatherURL = `${queryURL}data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${APIKey}&units=metric`;
+    $.ajax({
+        url: CurrentWeatherURL,
+        method: "GET",
+    }).then(function (response) {
+        //The response will be passed to a function that will display the data.
+        displayCurrentWeather(response);
+    })
+}
 //convert date to dd/mm/yyyy format using moment.
 
 
