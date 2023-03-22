@@ -5,7 +5,7 @@ var cityQueryCall;
 
 var SearchForCity = JSON.parse(localStorage.getItem("search")) || [];
 
-function citySearch(e) {
+function SearchForCity(e) {
     //prevent default for user input function to search for city 
     e.preventDefault();
 
@@ -22,7 +22,7 @@ function citySearch(e) {
 }
 
 //create event click for search button using search-button id from HTML. 
-$("search-button").on("click", citySearch);
+$("search-button").on("click", SearchForCity);
 
 //use API URL to get longitude and longitude coordinates.
 function getCoords(search) {
@@ -185,3 +185,20 @@ function displayCurrentWeather(weather) {
     }
 
 }
+
+// A function to ensure a search isn't duplicated
+function saveWeather(search) {
+    console.log(search);
+  
+    var duplicate = SearchForCity.find((item) => search == item);
+  
+    if (duplicate) {
+      return;
+    } else {
+      //last search will show on the top
+      SearchForCity.unshift(search);
+      $("#history").empty();
+      localStorage.setItem("search", JSON.stringify(SearchForCity));
+      lastHistory();
+    }
+  }
