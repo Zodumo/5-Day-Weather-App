@@ -161,6 +161,27 @@ function displayCurrentWeather(weather) {
 
             `http://openweathermap.org/img/wn/${weather.daily[i].weather[0].icon}.png`
         );
+
+        forecastList.append(iconElement);
+        //creating list element for temperature forecast
+        var TempForecast = $("<li>");
+        var tempElement = weather.daily(i).temp.day;
+        TempForecast.text("Temperature: " + tempElement + "°C");
+        forecastList.append(TempForecast);
+        console.log(weather.daily[i].temp.day);
+
+        //create list element for wind forcast 
+        var windForecast = $("<li>");
+        var windElement = weather.daily[i].wind_speed;
+        windForecast.text("wind: " + windElement + " m/s");
+        forecastList.append(windForecast);
+        console.log(weather.daily[i].wind_speed);
+
+        //create list element for humidity forecast
+        var humidityForecast = $("<li>");
+        var humidityElement = weather.daily[i].humidity;
+        humidityForecast.text("humidity: " + humidityElement + "%");
+        forecastList.append(humidityForecast);
     }
 
-
+}
