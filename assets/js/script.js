@@ -28,6 +28,7 @@ $("search-button").on("click", SearchForCity);
 function getCoords(search) {
     //call from API to get the city coords based on user search 
     var searchCoordsURL = `${queryURL}geo/1.0/direct?q=${search}&limit=5&appid=${APIKey}`;
+    console.log(searchCoordsURL)
     // first GET Ajax call to get coordinates
     $.ajax({
         url: searchCoordsURL,
@@ -189,16 +190,48 @@ function displayCurrentWeather(weather) {
 // A function to ensure a search isn't duplicated
 function saveWeather(search) {
     console.log(search);
-  
+
     var duplicate = SearchForCity.find((item) => search == item);
-  
+
     if (duplicate) {
-      return;
+        return;
     } else {
-      //last search will show on the top
-      SearchForCity.unshift(search);
-      $("#history").empty();
-      localStorage.setItem("search", JSON.stringify(SearchForCity));
-      lastHistory();
+        //last search will show on the top
+        SearchForCity.unshift(search);
+        $("#history").empty();
+        localStorage.setItem("search", JSON.stringify(SearchForCity));
+        lastHistory();
     }
-  }
+}
+    function searchHistory() {
+        $("#history").css({
+            display: "flex",
+            "flex-direction": "column",
+        });
+        //buttons created dynamically
+        var clearButton = $("<button>");
+        clearButton.text("Clear History").addClass(" btn btn-info mb-2");
+        // search to occur for 10 seconds
+        SearchForCity.splice(10);
+
+        SearchForCity.forEach((element) => {
+            var searchLi = $("<button>")
+                .text(element)
+                .addClass("btn btn-outline-info mb-2 ");
+            searchLi.on("click", function () {
+                var value = $(this).text();
+                getCoords(value);
+            });
+            $("#history").prepend(clearButton);
+            $("#history").append(searchLi);
+        });
+
+        // creating a clear history button to clear the user's search history
+        clearButton.on("click", function () {
+            localStorage.clear();
+            $("#history button").remove();
+            SearchForCity = [];
+        });
+
+    }
+searchHistory()
