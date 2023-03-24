@@ -8,7 +8,7 @@ This simple browser weather app allows users to search for the 5-day wether fore
 
 To install this application you simply have to clone the repository to your machine or access it via the link below as it has ben deployed using GitHub pages.
 
-Deployed link: 
+Deployed link: https://zodumo.github.io/5-Day-Weather-App/
 
 
 
